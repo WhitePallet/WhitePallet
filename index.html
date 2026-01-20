@@ -2,63 +2,156 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>劇団WhitePallet</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>劇団WhitePalette 公式サイト</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root { --main-bg: #fff; --main-black: #000; --accent-gray: #888; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); overflow-x: hidden; line-height: 1.6; }
+        
+        /* --- ヘッダー・メニュー（×アニメーション付） --- */
+        header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
+        .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
+        .menu-btn { background: none; border: none; cursor: pointer; z-index: 2200; width: 44px; height: 44px; position: relative; }
+        .menu-btn span { display: block; position: absolute; left: 10px; width: 24px; height: 3px; background: var(--main-black); transition: 0.4s; }
+        .menu-btn span:nth-child(1) { top: 14px; } .menu-btn span:nth-child(2) { top: 21px; } .menu-btn span:nth-child(3) { top: 28px; }
+        .menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-btn.active span:nth-child(2) { opacity: 0; }
+        .menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .nav-overlay { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: #fff; z-index: 2100; transition: 0.6s cubic-bezier(0.7, 0, 0.3, 1); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .nav-overlay.active { right: 0; }
+        .nav-overlay a { font-size: 2rem; font-weight: 900; color: var(--main-black); text-decoration: none; margin: 15px 0; letter-spacing: 5px; }
+
+        /* --- メインレイアウト --- */
+        .container { max-width: 1000px; margin: 120px auto; padding: 0 20px; }
+        section { margin-top: -70px; padding-top: 120px; margin-bottom: 100px; }
+        .section-title { font-size: clamp(2rem, 8vw, 3rem); font-weight: 900; border-left: 10px solid var(--main-black); padding-left: 15px; margin-bottom: 40px; }
+        .section-title span { display: block; font-size: 0.8rem; letter-spacing: 2px; color: var(--accent-gray); margin-top: 10px; font-weight: 700; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- パーツデザイン --- */
+        .info-card { border: 4px solid var(--main-black); padding: 30px; background: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 2px; background: var(--main-black); border: 2px solid var(--main-black); }
+        .item-card { background: #fff; padding: 40px 10px; text-align: center; transition: 0.3s; cursor: pointer; }
+        .item-card:hover { background: var(--main-black); color: #fff; }
+
+        /* --- モーダル（団員詳細用） --- */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; animation: modalOpen 0.4s ease; }
+        @keyframes modalOpen { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 2rem; cursor: pointer; font-weight: bold; }
+
+        footer { text-align: center; padding: 60px 20px; background: #f9f9f9; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1><img src="3.jpg"widht="80px"height="80px"align="middle"><d>劇団WhitePallet</d>    
- </h1>
-    </header>
-　　　　<h2>目次
-　　　<ul>　
-　　　　　　<li><a mouseenter href="index2.html">次回公演</a></li>
-            <li><a mouseenter href="index3.html">団員紹介</a></li>
-            <li><a mouseenter href="index4.html">劇団概要</a></li>
-            <li><a mouseenter href="index1.htm1">お問い合わせ</a></li>
-            
-        </ul>
-    </nav>
-    <main>       <img src="gazou1.jpg" alt="" width="300"></a>                                    
-        <section id="home">
-            <h3>公演情報</h3>
-            <p>作品名<br>アルプススタンドのはしの方<br><a href="1.jpg" data-lightbox="group"><img src="1.jpg"widht="100px"height="100px"align="middle"><a href="2.jpg" data-lightbox="group"><img src="2.jpg"widht="100px"height="100px"align="middle"></a> <br><font size="1">(画像をクリックすると拡大されます。)</font>       
-<p>作　藪　博晶</p><p>演出　大石</p>
-            <p>2025年4月19日（土）<br>会場<a href="https://maps.app.goo.gl/z2fACxebHxdWF2pW8" target="_blank">伊勢原市民文化会館小ホール</a><br><br><d>公開リハーサル</d>　開場　10：30　開演　11：00<br><d>本公演</d>    開場　17：30　開演　18：00</p>
-<p><b>キャスト</b><br>安田あすは　近藤翔子<br>田宮ひかる　成瀬夏音<br>藤野富士夫　かな<br>宮下恵　秋山ゆき</p>
-<p>スタッフ<br>演出　大石<br>舞台監督　植村啓市<br>大道具　詩原菊、秋山ゆき<br>小道具・衣装　近藤翔子、成瀬夏音<br>照明　植村啓市<br>音響　さつき、かな</p>
-<p>あらすじ<br>高校最後の夏。東播磨高校は夢にまで見た甲子園への出場が決定した。これは、甲子園常連校に立ち向かう野球部の熱き戦し･･････をアルプススタンドから観戦する生徒の物語である。 普段日の目を浴びることのない彼女たちの姿を目に焼き付けてください。
-        </section>
-        <section id="about">
-            <h4>劇団概要</h4><p>私たち劇団WhitePalletは伊勢原中学校出身者を中心に2023年に結成された劇団です。</p>
-            <p>【活動目標】　楽しい場所をつくること</p>
-            <p>【団員】　11名（学生10名、社会人1名）</p>
-            <p>【活動場所】　伊勢原市の公民館で活動しています。</p>
-　　　　　　<h5><d>劇団WhitePalletの歴史</d></h5>
-            <p>2023年4月16日結成<br>2024年3月31日劇団WhitePallet初回公演「ケチャップ・オブ・ザデット」公演<br>2025年</p>
-             </section>
-        <section id="cosA">団員紹介 
-            <p> さつき
-　　　　　　<p>   あきかわ　ゆき
-　　　　　　<p>   詩原　菊　（うたはら　きく）
-　　　　　　<p>   近藤　翔子（こんどう　しょうこ）
-            <p>   成瀬　夏音　（なるせ　なつね）
-　　　　　　<p>   大石　（おおいし）
-　　　　    <p>   かな
-　　　　　　<p>   川内康平　（かわうち　こうへい）
-　　　　　　<p>   森野　千　（）
-　　　　　　　</section>
-        <section id="contact">
-            <h2>お問い合わせ</h2>
-            <p></p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025　劇団WhitePallet</p>
-    </footer>
-    <script src="script.js"></script>
+
+<header>
+    <div class="logo">WhitePalette</div>
+    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+</header>
+
+<nav class="nav-overlay" id="navOverlay">
+    <a href="#next" class="nav-link">NEXT</a>
+    <a href="#members" class="nav-link">MEMBERS</a>
+    <a href="#archive" class="nav-link">ARCHIVE</a>
+    <a href="#contact" class="nav-link">CONTACT</a>
+</nav>
+
+<div class="container">
+    <section id="next" class="reveal">
+        <h2 class="section-title">NEXT<span>次回公演</span></h2>
+        <div class="info-card">
+            <div style="background:#000; color:#fff; display:inline-block; padding:5px 15px; font-weight:bold; margin-bottom:15px;">2026.03.14 (SAT)</div>
+            <h3>新作本公演『作品タイトル』</h3>
+            <p><strong>会場：伊丹アイホール</strong></p>
+            <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
+                <p>2021年7月29日午前9時、講堂。文化祭で上演するクラス劇の打ち合わせに、来るはずの嵯峨が来ない。...</p>
+                <p>高校生が描く、日常のリアル。その向こう側に、ある社会問題が見えてくるのだった。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="members" class="reveal">
+        <h2 class="section-title">MEMBERS<span>団員紹介</span></h2>
+        <div class="grid">
+            <div class="item-card" onclick="openModal('nishimatsu')"><h4>西松</h4><p>VIEW PROFILE</p></div>
+            <div class="item-card" onclick="openModal('kato')"><h4>賀東</h4><p>VIEW PROFILE</p></div>
+            <div class="item-card" onclick="openModal('asaoka')"><h4>浅岡</h4><p>VIEW PROFILE</p></div>
+            <div class="item-card" onclick="openModal('saga')"><h4>嵯峨</h4><p>VIEW PROFILE</p></div>
+        </div>
+    </section>
+
+    <section id="archive" class="reveal">
+        <h2 class="section-title">ARCHIVE<span>過去上演</span></h2>
+        <div class="grid">
+            <div class="item-card" style="cursor:default;"><h4>旗揚げ公演</h4><p>2025</p></div>
+            <div class="item-card" style="cursor:default;"><h4>第2回公演</h4><p>2024</p></div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal" style="text-align: center;">
+        <h2 class="section-title" style="border-left:none; padding-left:0;">CONTACT<span>お問い合わせ</span></h2>
+        <a href="mailto:info@whitepalette.example.com" style="display:inline-block; background:#000; color:#fff; padding:20px 60px; text-decoration:none; font-weight:900;">メールを送る</a>
+    </section>
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<footer><p>&copy; 劇団WhitePalette</p></footer>
+
+<script>
+    // メニュー制御
+    const menuBtn = document.getElementById('menuBtn');
+    const navOverlay = document.getElementById('navOverlay');
+    menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menuBtn.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+    });
+
+    // 団員詳細データ
+    const memberData = {
+        'nishimatsu': '<h2>西松</h2><hr><p>劇団WhitePalette所属。今回の公演ではリーダー的存在を演じる。繊細な感情表現に定評がある。</p>',
+        'kato': '<h2>賀東</h2><hr><p>劇団WhitePalette所属。鋭いセリフ回しと圧倒的な存在感で舞台を支える看板俳優。</p>',
+        'asaoka': '<h2>浅岡</h2><hr><p>劇団WhitePalette所属。コメディからシリアスまでこなす幅広い演技力が魅力。</p>',
+        'saga': '<h2>嵯峨</h2><hr><p>劇団WhitePalette所属。物語の鍵を握るミステリアスな役どころを得意とする。</p>'
+    };
+
+    function openModal(id) {
+        document.getElementById('modal-body').innerHTML = memberData[id];
+        document.getElementById('modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    window.onclick = (event) => {
+        if (event.target == document.getElementById('modal')) closeModal();
+    };
+
+    // スクロールアニメ
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
-
-
