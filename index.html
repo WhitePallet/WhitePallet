@@ -14,6 +14,8 @@
         /* ヘッダー */
         header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
         .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
+        
+        /* メニューボタン（×アニメ） */
         .menu-btn { background: none; border: none; cursor: pointer; z-index: 2200; width: 44px; height: 44px; position: relative; }
         .menu-btn span { display: block; position: absolute; left: 10px; width: 24px; height: 3px; background: var(--main-black); transition: 0.4s; }
         .menu-btn span:nth-child(1) { top: 14px; } .menu-btn span:nth-child(2) { top: 21px; } .menu-btn span:nth-child(3) { top: 28px; }
@@ -33,21 +35,26 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- 次回公演 画像・情報エリア --- */
-        .next-container { display: grid; grid-template-columns: 1fr; gap: 30px; }
-        @media (min-width: 768px) { .next-container { grid-template-columns: 1fr 1fr; } }
+        /* --- 次回公演 レイアウト（反転版） --- */
+        .next-container { display: flex; flex-direction: column-reverse; gap: 30px; }
+        @media (min-width: 768px) { 
+            .next-container { flex-direction: row; } 
+        }
         
-        .next-visual { border: 4px solid #000; background: #f0f0f0; aspect-ratio: 1/1.4; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        /* 画像を右側へ（flex-growで調整） */
+        .next-visual { 
+            flex: 1; border: 4px solid #000; background: #f0f0f0; 
+            aspect-ratio: 1/1.4; display: flex; justify-content: center; align-items: center; overflow: hidden; 
+        }
         .next-visual img { width: 100%; height: 100%; object-fit: cover; }
         
-        .info-card { border: 4px solid var(--main-black); padding: 30px; background: #fff; height: 100%; }
+        .info-card { flex: 1.2; border: 4px solid var(--main-black); padding: 30px; background: #fff; }
 
-        /* 団員グリッド（モーダル用） */
+        /* 団員・過去上演グリッド */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 2px; background: var(--main-black); border: 2px solid var(--main-black); }
         .item-card { background: #fff; padding: 40px 10px; text-align: center; transition: 0.3s; cursor: pointer; height: 100%; }
         .item-card:hover { background: var(--main-black); color: #fff; }
 
-        /* 過去上演リンク */
         .archive-link { text-decoration: none; color: inherit; }
 
         /* モーダル */
@@ -78,18 +85,19 @@
     <section id="next" class="reveal">
         <h2 class="section-title">NEXT<span>次回公演</span></h2>
         <div class="next-container">
-            <div class="next-visual">
-                <p style="color:#aaa; font-weight:bold;">1.jpg</p>
-                </div>
-            
             <div class="info-card">
                 <div style="background:#000; color:#fff; display:inline-block; padding:5px 15px; font-weight:bold; margin-bottom:15px;">2026.03.14 (SAT)</div>
-                <h3>新作本公演『タイトル』</h3>
+                <h3>新作本公演『作品タイトル』</h3>
                 <p><strong>会場：伊丹アイホール</strong></p>
                 <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
                     <p>あらすじ：2021年7月29日午前9時、講堂。文化祭で上演するクラス劇の打ち合わせに、来るはずの嵯峨が来ない。...</p>
-                    <a href="chirashi.pdf" download class="logo" style="display:block; margin-top:20px; font-size:0.9rem; text-decoration:underline;">[DOWNLOAD FLYER]</a>
+                    <p>高校生が描く、日常のリアル。その向こう側に、ある社会問題が見えてくるのだった。</p>
+                    <a href="chirashi.pdf" download class="logo" style="display:block; margin-top:20px; font-size:0.9rem; text-decoration:underline; cursor:pointer;">[DOWNLOAD FLYER]</a>
                 </div>
+            </div>
+
+            <div class="next-visual">
+                <p style="color:#aaa; font-weight:bold; padding:20px; text-align:center;">VISUAL IMAGE<br><span style="font-size:0.8rem;">（画像をここに挿入）</span></p>
             </div>
         </div>
     </section>
@@ -107,18 +115,14 @@
     <section id="archive" class="reveal">
         <h2 class="section-title">ARCHIVE<span>過去上演</span></h2>
         <div class="grid">
-            <a href="archive-2025.html" class="archive-link">
-                <div class="item-card"><h4>旗揚げ公演</h4><p>2025</p></div>
-            </a>
-            <a href="archive-2024.html" class="archive-link">
-                <div class="item-card"><h4>第2回公演</h4><p>2024</p></div>
-            </a>
+            <a href="archive-2025.html" class="archive-link"><div class="item-card"><h4>旗揚げ公演</h4><p>2025</p></div></a>
+            <a href="archive-2024.html" class="archive-link"><div class="item-card"><h4>第2回公演</h4><p>2024</p></div></a>
         </div>
     </section>
 
     <section id="contact" class="reveal" style="text-align: center;">
         <h2 class="section-title" style="border-left:none; padding-left:0;">CONTACT<span>お問い合わせ</span></h2>
-        <a href="mailto:info@whitepalette.example.com" style="display:inline-block; background:#000; color:#fff; padding:20px 60px; text-decoration:none; font-weight:900;">メールを送る</a>
+        <a href="mailto:info@whitepalette.example.com" style="display:inline-block; background:#000; color:#fff; padding:20px 60px; text-decoration:none; font-weight:900; transition:0.3s;">メールを送る</a>
     </section>
 </div>
 
@@ -146,7 +150,7 @@
     });
 
     const memberData = {
-        'nishimatsu': '<h2>西松</h2><hr><p>劇団WhitePalette所属。今回の公演ではリーダー的役割を演じる。</p>',
+        'nishimatsu': '<h2>西松</h2><hr><p>劇団WhitePalette所属。今回の公演ではリーダー的な役割を演じる。</p>',
         'kato': '<h2>賀東</h2><hr><p>劇団WhitePalette所属。看板俳優として舞台を支える。</p>',
         'asaoka': '<h2>浅岡</h2><hr><p>劇団WhitePalette所属。多才な演技力が魅力。</p>',
         'saga': '<h2>嵯峨</h2><hr><p>劇団WhitePalette所属。ミステリアスな役どころを得意とする。</p>'
