@@ -11,7 +11,7 @@
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); overflow-x: hidden; line-height: 1.6; }
         
-        /* --- ヘッダー・メニュー（×アニメーション付） --- */
+        /* ヘッダー */
         header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
         .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
         .menu-btn { background: none; border: none; cursor: pointer; z-index: 2200; width: 44px; height: 44px; position: relative; }
@@ -25,21 +25,32 @@
         .nav-overlay.active { right: 0; }
         .nav-overlay a { font-size: 2rem; font-weight: 900; color: var(--main-black); text-decoration: none; margin: 15px 0; letter-spacing: 5px; }
 
-        /* --- メインレイアウト --- */
+        /* コンテンツ */
         .container { max-width: 1000px; margin: 120px auto; padding: 0 20px; }
         section { margin-top: -70px; padding-top: 120px; margin-bottom: 100px; }
         .section-title { font-size: clamp(2rem, 8vw, 3rem); font-weight: 900; border-left: 10px solid var(--main-black); padding-left: 15px; margin-bottom: 40px; }
-        .section-title span { display: block; font-size: 0.8rem; letter-spacing: 2px; color: var(--accent-gray); margin-top: 10px; font-weight: 700; }
+        .section-title span { display: block; font-size: 0.8rem; letter-spacing: 2px; color: var(--accent-gray); margin-top: 10px; }
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- パーツデザイン --- */
-        .info-card { border: 4px solid var(--main-black); padding: 30px; background: #fff; }
+        /* --- 次回公演 画像・情報エリア --- */
+        .next-container { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        @media (min-width: 768px) { .next-container { grid-template-columns: 1fr 1fr; } }
+        
+        .next-visual { border: 4px solid #000; background: #f0f0f0; aspect-ratio: 1/1.4; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .next-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .info-card { border: 4px solid var(--main-black); padding: 30px; background: #fff; height: 100%; }
+
+        /* 団員グリッド（モーダル用） */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 2px; background: var(--main-black); border: 2px solid var(--main-black); }
-        .item-card { background: #fff; padding: 40px 10px; text-align: center; transition: 0.3s; cursor: pointer; }
+        .item-card { background: #fff; padding: 40px 10px; text-align: center; transition: 0.3s; cursor: pointer; height: 100%; }
         .item-card:hover { background: var(--main-black); color: #fff; }
 
-        /* --- モーダル（団員詳細用） --- */
+        /* 過去上演リンク */
+        .archive-link { text-decoration: none; color: inherit; }
+
+        /* モーダル */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
         .modal.active { display: flex; }
         .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; animation: modalOpen 0.4s ease; }
@@ -66,13 +77,19 @@
 <div class="container">
     <section id="next" class="reveal">
         <h2 class="section-title">NEXT<span>次回公演</span></h2>
-        <div class="info-card">
-            <div style="background:#000; color:#fff; display:inline-block; padding:5px 15px; font-weight:bold; margin-bottom:15px;">2026.03.14 (SAT)</div>
-            <h3>新作本公演『7月29日午前9時集合』</h3>
-            <p><strong>会場：伊丹アイホール</strong></p>
-            <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
-                <p>2021年7月29日午前9時、講堂。文化祭で上演するクラス劇の打ち合わせに、来るはずの嵯峨が来ない。...</p>
-                <p>高校生が描く、日常のリアル。その向こう側に、ある社会問題が見えてくるのだった。</p>
+        <div class="next-container">
+            <div class="next-visual">
+                <p style="color:#aaa; font-weight:bold;">ここにメインビジュアル画像を表示</p>
+                </div>
+            
+            <div class="info-card">
+                <div style="background:#000; color:#fff; display:inline-block; padding:5px 15px; font-weight:bold; margin-bottom:15px;">2026.03.14 (SAT)</div>
+                <h3>新作本公演『タイトル』</h3>
+                <p><strong>会場：伊丹アイホール</strong></p>
+                <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
+                    <p>あらすじ：2021年7月29日午前9時、講堂。文化祭で上演するクラス劇の打ち合わせに、来るはずの嵯峨が来ない。...</p>
+                    <a href="chirashi.pdf" download class="logo" style="display:block; margin-top:20px; font-size:0.9rem; text-decoration:underline;">[DOWNLOAD FLYER]</a>
+                </div>
             </div>
         </div>
     </section>
@@ -80,9 +97,9 @@
     <section id="members" class="reveal">
         <h2 class="section-title">MEMBERS<span>団員紹介</span></h2>
         <div class="grid">
-            <div class="item-card" onclick="openModal('nishimatsu')"><h4>かな</h4><p>VIEW PROFILE</p></div>
-            <div class="item-card" onclick="openModal('kato')"><h4>さつき</h4><p>VIEW PROFILE</p></div>
-            <div class="item-card" onclick="openModal('asaoka')"><h4>川内</h4><p>VIEW PROFILE</p></div>
+            <div class="item-card" onclick="openModal('nishimatsu')"><h4>西松</h4><p>VIEW PROFILE</p></div>
+            <div class="item-card" onclick="openModal('kato')"><h4>賀東</h4><p>VIEW PROFILE</p></div>
+            <div class="item-card" onclick="openModal('asaoka')"><h4>浅岡</h4><p>VIEW PROFILE</p></div>
             <div class="item-card" onclick="openModal('saga')"><h4>嵯峨</h4><p>VIEW PROFILE</p></div>
         </div>
     </section>
@@ -90,8 +107,12 @@
     <section id="archive" class="reveal">
         <h2 class="section-title">ARCHIVE<span>過去上演</span></h2>
         <div class="grid">
-            <div class="item-card" style="cursor:default;"><h4>旗揚げ公演</h4><p>2024</p></div>
-            <div class="item-card" style="cursor:default;"><h4>第2回公演</h4><p>2025</p></div>
+            <a href="archive-2025.html" class="archive-link">
+                <div class="item-card"><h4>旗揚げ公演</h4><p>2025</p></div>
+            </a>
+            <a href="archive-2024.html" class="archive-link">
+                <div class="item-card"><h4>第2回公演</h4><p>2024</p></div>
+            </a>
         </div>
     </section>
 
@@ -111,7 +132,6 @@
 <footer><p>&copy; 劇団WhitePalette</p></footer>
 
 <script>
-    // メニュー制御
     const menuBtn = document.getElementById('menuBtn');
     const navOverlay = document.getElementById('navOverlay');
     menuBtn.addEventListener('click', () => {
@@ -125,12 +145,11 @@
         });
     });
 
-    // 団員詳細データ
     const memberData = {
-        'nishimatsu': '<h2>西松</h2><hr><p>劇団WhitePalette所属。今回の公演ではリーダー的存在を演じる。繊細な感情表現に定評がある。</p>',
-        'kato': '<h2>賀東</h2><hr><p>劇団WhitePalette所属。鋭いセリフ回しと圧倒的な存在感で舞台を支える看板俳優。</p>',
-        'asaoka': '<h2>浅岡</h2><hr><p>劇団WhitePalette所属。コメディからシリアスまでこなす幅広い演技力が魅力。</p>',
-        'saga': '<h2>嵯峨</h2><hr><p>劇団WhitePalette所属。物語の鍵を握るミステリアスな役どころを得意とする。</p>'
+        'nishimatsu': '<h2>西松</h2><hr><p>劇団WhitePalette所属。今回の公演ではリーダー的役割を演じる。</p>',
+        'kato': '<h2>賀東</h2><hr><p>劇団WhitePalette所属。看板俳優として舞台を支える。</p>',
+        'asaoka': '<h2>浅岡</h2><hr><p>劇団WhitePalette所属。多才な演技力が魅力。</p>',
+        'saga': '<h2>嵯峨</h2><hr><p>劇団WhitePalette所属。ミステリアスな役どころを得意とする。</p>'
     };
 
     function openModal(id) {
@@ -142,11 +161,8 @@
         document.getElementById('modal').classList.remove('active');
         document.body.style.overflow = 'auto';
     }
-    window.onclick = (event) => {
-        if (event.target == document.getElementById('modal')) closeModal();
-    };
+    window.onclick = (event) => { if (event.target == document.getElementById('modal')) closeModal(); };
 
-    // スクロールアニメ
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
