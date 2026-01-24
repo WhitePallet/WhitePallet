@@ -32,15 +32,25 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* 次回公演 */
+        /* 次回公演：画像枠を細く、背景を白に変更 */
         .next-container { display: flex; flex-direction: column; gap: 30px; }
         @media (min-width: 768px) { .next-container { flex-direction: row; align-items: flex-start; } }
         .info-card { flex: 1.2; border: 4px solid var(--main-black); padding: clamp(25px, 5vw, 45px); background: #fff; }
-        .next-visual { flex: 1; border: 4px solid #000; background: #f0f0f0; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        
+        .next-visual { 
+            flex: 1; 
+            border: 1px solid #000; /* 枠を1pxに変更 */
+            background: #fff;      /* 背景を白に変更 */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
+            line-height: 0;        /* 画像下の隙間を排除 */
+        }
         @media (min-width: 768px) { .next-visual { position: sticky; top: 100px; aspect-ratio: 1/1.4; } }
         .next-visual img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* 団員グリッド（画像を削除したシンプル版） */
+        /* 団員グリッド */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
         .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; padding: 30px 10px; }
         .item-card:hover { background: var(--main-black); color: #fff; transform: translateY(-5px); }
