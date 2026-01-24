@@ -32,7 +32,7 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* NEXTセクション：画像全体を表示する設定 */
+        /* 次回公演：画像全体を表示する設定 + スライドショー */
         .next-container { display: flex; flex-direction: column; gap: 30px; }
         @media (min-width: 768px) { .next-container { flex-direction: row; align-items: flex-start; } }
         .info-card { flex: 1.2; border: 4px solid var(--main-black); padding: clamp(25px, 5vw, 45px); background: #fff; }
@@ -42,7 +42,8 @@
             border: 1px solid #000; 
             background: #fff; 
             line-height: 0;
-            /* 高さを固定せず、中身の画像に合わせる設定 */
+            position: relative; /* スライドボタンのために追加 */
+            overflow: hidden;   /* スライドを隠すために追加 */
             height: auto;
         }
         @media (min-width: 768px) { 
@@ -51,12 +52,41 @@
                 top: 100px; 
             } 
         }
-        .next-visual img { 
+        .next-slides {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .next-slide {
+            min-width: 100%;
+        }
+        .next-slide img { 
             width: 100%; 
             height: auto; 
             display: block; 
             object-fit: contain; /* 画像を縮小して全体を表示 */
         }
+        /* スライドボタン */
+        .next-slider-btn { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: rgba(0,0,0,0.5); 
+            color: #fff; 
+            border: none; 
+            width: 40px; 
+            height: 40px; 
+            cursor: pointer; 
+            z-index: 10; 
+            font-size: 1rem; 
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .next-slider-btn:hover { background: rgba(0,0,0,0.8); }
+        .next-prev { left: 0; }
+        .next-next { right: 0; }
+
 
         /* 団員グリッド */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
@@ -96,12 +126,30 @@
                 <h3>新作本公演『物語のタイトル』</h3>
                 <p><strong>会場：伊丹アイホール</strong></p>
                 <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
-                    <p>あらすじ：ここに劇のあらすじが入ります。長い文章でもしっかり表示されます。</p>
+                    <p>
+                        2021年7月29日午前9時、講堂。文化祭で上演するクラス劇の打ち合わせに、来るはずの嵯峨が来ない。
+                        仕方なく話し合いをはじめる西松、賀東、浅岡の三人。オリンピックの話、コロナの話、クラス、部活、
+                        進路の話、家族の話。打ち合わせは一向に進まない。クラス劇はどうなるのだろう。そして嵯峨は･･･。
+                        高校生が描く、日常のリアル。その向こう側に、ある社会問題が見えてくるのだった。
+                    </p>
                     <a href="#" download class="logo" style="display:block; margin-top:30px; font-size:0.8rem; text-decoration:underline;">[DOWNLOAD FLYER]</a>
                 </div>
             </div>
             <div class="next-visual">
-                <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475631558590525/1769228577282.jpg?ex=69759ab7&is=69744937&hm=3f00ffa6e647a5d3a27218dc20c663e5aeb8ae9bc7637f6113c22d337d8ccfae&" alt="公演画像">
+                <button class="next-slider-btn next-prev" onclick="moveNextSlide(-1)">❮</button>
+                <button class="next-slider-btn next-next" onclick="moveNextSlide(1)">❯</button>
+                
+                <div class="next-slides" id="nextSlideContainer">
+                    <div class="next-slide">
+                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475630178533552/1769228582196.jpg?ex=69759ab6&is=69744936&hm=b4094fdb0b0db5079b45977fc2ddfe87362b135efd47840ab89767b14edf1797&" alt="公演ポスター1">
+                    </div>
+                    <div class="next-slide">
+                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475630879113226/1769228580948.jpg?ex=69759ab7&is=69744937&hm=599e85b998f3dd73bd7f0ffc9810b335bd23114a86c7e805cc65345f49027166&" alt="公演ポスター2">
+                    </div>
+                    <div class="next-slide">
+                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475631210205256/1769228579606.jpg?ex=69759ab7&is=69744937&hm=e8d72933859155d7048dcc3bedcc26f310dfcc78ab825ef6e682666fdda72013&" alt="公演ポスター3">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -154,6 +202,21 @@
         menuBtn.classList.toggle('active');
         navOverlay.classList.toggle('active');
     });
+
+    // NEXTセクションのスライドショー制御
+    let currentNextSlide = 0;
+    const nextSlides = document.getElementById('nextSlideContainer');
+    const totalNextSlides = 3; // 画像の枚数に合わせる
+
+    function moveNextSlide(step) {
+        currentNextSlide = (currentNextSlide + step + totalNextSlides) % totalNextSlides;
+        nextSlides.style.transform = `translateX(-${currentNextSlide * 100}%)`;
+    }
+
+    // 自動スクロール
+    setInterval(() => {
+        moveNextSlide(1);
+    }, 4000); // 4秒ごとにスライド
 
     const memberData = {
         '01': '<h2>団員 01</h2><hr><p>プロフィールの詳細です。</p>',
