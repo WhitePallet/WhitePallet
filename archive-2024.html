@@ -24,11 +24,9 @@
         .archive-layout { display: flex; flex-direction: column; gap: 40px; }
         @media (min-width: 768px) { .archive-layout { flex-direction: row; } }
 
-        /* 左側：ポスター画像エリア */
-        .archive-visual { flex: 1; border: 4px solid #000; background: #f0f0f0; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .archive-visual { flex: 1; border: 4px solid #000; background: #f0f0f0; display: flex; justify-content: center; align-items: center; }
         .archive-visual img { width: 100%; height: auto; display: block; }
 
-        /* 右側：情報エリア */
         .archive-info { flex: 1.2; }
         .info-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .info-table th, .info-table td { padding: 15px 0; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
@@ -36,12 +34,6 @@
 
         .synopsis-box { margin-top: 40px; padding: 30px; border: 2px solid #000; background: #fafafa; }
         .synopsis-box h3 { margin-top: 0; font-weight: 900; }
-
-        /* 追加：サブ画像エリア（ギャラリー風） */
-        .archive-gallery { margin-top: 60px; }
-        .gallery-title { font-weight: 900; margin-bottom: 20px; font-size: 1.2rem; }
-        .gallery-item { border: 4px solid #000; width: 100%; max-width: 600px; }
-        .gallery-item img { width: 100%; height: auto; display: block; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid #eee; margin-top: 100px; }
     </style>
@@ -56,20 +48,20 @@
     <a href="index.html" class="back-link">← BACK TO HOME</a>
 
     <article class="archive-header">
-        <div class="archive-year">Special Archive</div>
-        <h1 class="archive-title">公演アーカイブ詳細</h1>
+        <div class="archive-year">2025 Performance</div>
+        <h1 class="archive-title">旗揚げ公演『ここにタイトル』</h1>
     </article>
 
     <div class="archive-layout">
         <div class="archive-visual">
-            <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464469671003684917/91__20250113134518.png?ex=6975952a&is=697443aa&hm=a858554c3bfb7c59af412df8be92f9343989fa19a6e67f2eb8a831f1069eaa2d&" alt="メインポスター">
+            <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&" alt="公演ビジュアル">
         </div>
 
         <div class="archive-info">
             <table class="info-table">
                 <tr>
                     <th>DATE</th>
-                    <td>202X年 〇月 〇日 〜 〇日</td>
+                    <td>2025年 〇月 〇日 〜 〇日</td>
                 </tr>
                 <tr>
                     <th>PLACE</th>
@@ -77,27 +69,20 @@
                 </tr>
                 <tr>
                     <th>CAST</th>
-                    <td>劇団WhitePalette 団員一同</td>
+                    <td>団員01 / 団員02 / 団員03 / ゲスト俳優</td>
                 </tr>
                 <tr>
                     <th>STAFF</th>
-                    <td>演出・脚本：WhitePalette</td>
+                    <td>演出：〇〇 / 脚本：〇〇 / 照明：〇〇</td>
                 </tr>
             </table>
 
             <div class="synopsis-box">
                 <h3>STORY</h3>
                 <p>
-                    劇団の活動記録をここに記載します。
-                    2枚の画像を贅沢に使用したレイアウトになっています。
+                    当時のあらすじをここに記載します。劇団の歴史を振り返る大切なアーカイブになります。
+                    文章量が多くなっても、この枠が自動で伸びて表示されるようになっています。
                 </p>
-            </div>
-
-            <div class="archive-gallery">
-                <div class="gallery-title">STAGE PHOTO</div>
-                <div class="gallery-item">
-                    <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464470002835914863/91__20241230195316.png?ex=69759579&is=697443f9&hm=7f368333ead1c07a8b3d5de3e324ea77042d805e4df69d6825e4086fd381b7de&" alt="サブ画像">
-                </div>
             </div>
         </div>
     </div>
