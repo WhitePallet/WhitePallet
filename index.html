@@ -1,9 +1,3 @@
-メインサイト（index.html）の過去上演（ARCHIVE）セクションに、先ほどのスライド機能を組み込みました。
-
-「枠を細くして画像を見やすくする」デザインを反映し、スライドの矢印ボタンも画像に被りすぎないよう調整しています。
-
-HTML
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,9 +11,9 @@ HTML
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); overflow-x: hidden; line-height: 1.8; }
         
-        /* ヘッダー */
         header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
         .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
+        
         .menu-btn { background: none; border: none; cursor: pointer; z-index: 2200; width: 44px; height: 44px; position: relative; }
         .menu-btn span { display: block; position: absolute; left: 10px; width: 24px; height: 3px; background: var(--main-black); transition: 0.4s; }
         .menu-btn span:nth-child(1) { top: 14px; } .menu-btn span:nth-child(2) { top: 21px; } .menu-btn span:nth-child(3) { top: 28px; }
@@ -35,57 +29,47 @@ HTML
         section { margin-top: -70px; padding-top: 120px; margin-bottom: 100px; }
         .section-title { font-size: clamp(2rem, 8vw, 3rem); font-weight: 900; border-left: 10px solid var(--main-black); padding-left: 15px; margin-bottom: 40px; }
         .section-title span { display: block; font-size: 0.8rem; letter-spacing: 2px; color: var(--accent-gray); margin-top: 10px; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* 次回公演 */
-        .next-container { display: flex; flex-direction: column; gap: 30px; }
-        @media (min-width: 768px) { .next-container { flex-direction: row; align-items: flex-start; } }
-        .info-card { flex: 1.2; border: 4px solid var(--main-black); padding: clamp(25px, 5vw, 45px); background: #fff; }
-        .next-visual { flex: 1; border: 4px solid #000; background: #f0f0f0; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        @media (min-width: 768px) { .next-visual { position: sticky; top: 100px; aspect-ratio: 1/1.4; } }
-        .next-visual img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* 団員グリッド */
+        /* --- 団員グリッド --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
-        .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; padding: 30px 10px; }
+        .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); padding: 30px 10px; text-decoration: none; color: inherit; }
         .item-card:hover { background: var(--main-black); color: #fff; transform: translateY(-5px); }
-        .member-name { font-weight: 900; font-size: 1.1rem; }
 
-        /* --- ARCHIVE スライドショー設定 (細枠版) --- */
-        .archive-slider-container { max-width: 600px; margin: 0 auto; }
-        .archive-slider { 
+        /* --- 修正ポイント：ARCHIVE スライド（細枠＆画像重視） --- */
+        .archive-slider-box { max-width: 500px; margin: 0 auto; }
+        .slider-frame { 
             position: relative; 
-            border: 1px solid #000; /* 枠を小さく */
-            background: #fff; 
-            overflow: hidden;
+            border: 1px solid #000; /* 黒枠を細く */
+            overflow: hidden; 
+            background: #fff;
             line-height: 0;
         }
         .slides { display: flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
         .slide { min-width: 100%; position: relative; }
         .slide img { width: 100%; height: auto; display: block; }
         
-        /* スライド内の情報バー */
-        .slide-info { 
+        /* スライド内のラベル */
+        .slide-caption { 
             background: rgba(255,255,255,0.9); 
-            color: #000; 
             padding: 15px; 
             text-align: center; 
             border-top: 1px solid #000;
         }
-        .slide-info h4 { margin: 0; font-size: 1rem; font-weight: 900; }
-        .slide-info a { color: #000; font-size: 0.8rem; font-weight: bold; text-decoration: underline; }
-        
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 40px; height: 40px; cursor: pointer; z-index: 10; font-size: 1rem; transition: 0.3s; }
-        .slider-btn:hover { background: #000; }
-        .prev { left: 0; }
-        .next { right: 0; }
+        .slide-caption h4 { margin: 0; font-size: 0.9rem; font-weight: 900; }
+        .slide-caption a { font-size: 0.75rem; color: #000; font-weight: bold; text-decoration: underline; }
+
+        .s-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: #fff; border: none; width: 40px; height: 40px; cursor: pointer; z-index: 10; transition: 0.3s; }
+        .s-btn:hover { background: rgba(0,0,0,0.8); }
+        .prev-b { left: 0; }
+        .next-b { right: 0; }
 
         /* モーダル */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
         .modal.active { display: flex; }
-        .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; color: #000; }
-        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 2rem; cursor: pointer; font-weight: bold; }
+        .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; }
+        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 2rem; cursor: pointer; }
 
         footer { text-align: center; padding: 60px 20px; background: #f9f9f9; border-top: 1px solid #eee; }
     </style>
@@ -107,58 +91,38 @@ HTML
 <div class="container">
     <section id="next" class="reveal">
         <h2 class="section-title">NEXT<span>次回公演</span></h2>
-        <div class="next-container">
-            <div class="info-card">
-                <div style="background:#000; color:#fff; display:inline-block; padding:5px 15px; font-weight:bold; margin-bottom:15px; font-size:0.9rem;">2026.03.14 (SAT)</div>
-                <h3>新作本公演『物語のタイトル』</h3>
-                <p><strong>会場：伊丹アイホール</strong></p>
-                <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
-                    <p>あらすじ：ここに劇のあらすじが入ります。長い文章でもしっかり表示されます。</p>
-                    <a href="#" download class="logo" style="display:block; margin-top:30px; font-size:0.8rem; text-decoration:underline;">[DOWNLOAD FLYER]</a>
-                </div>
-            </div>
-            <div class="next-visual">
-                <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475631558590525/1769228577282.jpg?ex=69759ab7&is=69744937&hm=3f00ffa6e647a5d3a27218dc20c663e5aeb8ae9bc7637f6113c22d337d8ccfae&" alt="公演画像">
-            </div>
+        <div style="border:4px solid #000; padding:40px; text-align:center;">
+            <p>2026.03.14 新作本公演 準備中</p>
         </div>
     </section>
 
     <section id="members" class="reveal">
         <h2 class="section-title">MEMBERS<span>団員紹介</span></h2>
         <div class="grid">
-            <div class="item-card" onclick="openModal('01')"><div class="member-name">団員 01</div></div>
-            <div class="item-card" onclick="openModal('02')"><div class="member-name">団員 02</div></div>
-            <div class="item-card" onclick="openModal('03')"><div class="member-name">団員 03</div></div>
-            <div class="item-card" onclick="openModal('04')"><div class="member-name">団員 04</div></div>
-            <div class="item-card" onclick="openModal('05')"><div class="member-name">団員 05</div></div>
-            <div class="item-card" onclick="openModal('06')"><div class="member-name">団員 06</div></div>
-            <div class="item-card" onclick="openModal('07')"><div class="member-name">団員 07</div></div>
-            <div class="item-card" onclick="openModal('08')"><div class="member-name">団員 08</div></div>
-            <div class="item-card" onclick="openModal('09')"><div class="member-name">団員 09</div></div>
-            <div class="item-card" onclick="openModal('10')"><div class="member-name">団員 10</div></div>
-            <div class="item-card" onclick="openModal('11')"><div class="member-name">団員 11</div></div>
-            <div class="item-card" onclick="openModal('12')"><div class="member-name">団員 12</div></div>
-        </div>
+            <div class="item-card" onclick="openModal('01')">団員 01</div>
+            <div class="item-card" onclick="openModal('02')">団員 02</div>
+            <div class="item-card" onclick="openModal('03')">団員 03</div>
+            </div>
     </section>
 
     <section id="archive" class="reveal">
         <h2 class="section-title">ARCHIVE<span>過去上演</span></h2>
-        <div class="archive-slider-container">
-            <div class="archive-slider">
-                <button class="slider-btn prev" onclick="moveSlide(-1)">❮</button>
-                <button class="slider-btn next" onclick="moveSlide(1)">❯</button>
+        <div class="archive-slider-box">
+            <div class="slider-frame">
+                <button class="s-btn prev-b" onclick="moveSlide(-1)">❮</button>
+                <button class="s-btn next-b" onclick="moveSlide(1)">❯</button>
                 
                 <div class="slides" id="slideContainer">
                     <div class="slide">
-                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464469671003684917/91__20250113134518.png?ex=6975952a&is=697443aa&hm=a858554c3bfb7c59af412df8be92f9343989fa19a6e67f2eb8a831f1069eaa2d&" alt="2025公演">
-                        <div class="slide-info">
+                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464469671003684917/91__20250113134518.png?ex=6975952a&is=697443aa&hm=a858554c3bfb7c59af412df8be92f9343989fa19a6e67f2eb8a831f1069eaa2d&" alt="2025">
+                        <div class="slide-caption">
                             <h4>旗揚げ公演 (2025)</h4>
                             <a href="archive-2025.html">VIEW DETAILS</a>
                         </div>
                     </div>
                     <div class="slide">
-                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464470002835914863/91__20241230195316.png?ex=69759579&is=697443f9&hm=7f368333ead1c07a8b3d5de3e324ea77042d805e4df69d6825e4086fd381b7de&" alt="2024公演">
-                        <div class="slide-info">
+                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464470002835914863/91__20241230195316.png?ex=69759579&is=697443f9&hm=7f368333ead1c07a8b3d5de3e324ea77042d805e4df69d6825e4086fd381b7de&" alt="2024">
+                        <div class="slide-caption">
                             <h4>第2回公演 (2024)</h4>
                             <a href="archive-2024.html">VIEW DETAILS</a>
                         </div>
@@ -170,7 +134,7 @@ HTML
 
     <section id="contact" class="reveal" style="text-align: center;">
         <h2 class="section-title" style="border-left:none; padding-left:0;">CONTACT<span>お問い合わせ</span></h2>
-        <a href="mailto:info@whitepalette.example.com" style="display:inline-block; background:#000; color:#fff; padding:20px 60px; text-decoration:none; font-weight:900;">メールを送る</a>
+        <a href="mailto:info@example.com" style="display:inline-block; background:#000; color:#fff; padding:20px 60px; text-decoration:none; font-weight:900;">メールを送る</a>
     </section>
 </div>
 
@@ -184,6 +148,7 @@ HTML
 <footer><p>&copy; 劇団WhitePalette</p></footer>
 
 <script>
+    // メニュー
     const menuBtn = document.getElementById('menuBtn');
     const navOverlay = document.getElementById('navOverlay');
     menuBtn.addEventListener('click', () => {
@@ -193,32 +158,23 @@ HTML
 
     // ARCHIVE スライド制御
     let currentSlide = 0;
-    const slideContainer = document.getElementById('slideContainer');
+    const slides = document.getElementById('slideContainer');
     const totalSlides = 2;
-
     function moveSlide(step) {
         currentSlide = (currentSlide + step + totalSlides) % totalSlides;
-        slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
     }
 
-    const memberData = {
-        '01': '<h2>団員 01</h2><hr><p>プロフィールの詳細です。</p>',
-        '02': '<h2>団員 02</h2><hr><p>プロフィールの詳細です。</p>',
-        // ... (他のデータはそのまま)
-        '12': '<h2>団員 12</h2><hr><p>プロフィールの詳細です。</p>'
-    };
-
+    // 団員モーダル（仮）
     function openModal(id) {
-        document.getElementById('modal-body').innerHTML = memberData[id] || '<h2>' + id + '</h2><p>詳細準備中</p>';
+        document.getElementById('modal-body').innerHTML = '<h2>団員 ' + id + '</h2><p>プロフィール詳細がここに入ります。</p>';
         document.getElementById('modal').classList.add('active');
-        document.body.style.overflow = 'hidden';
     }
     function closeModal() {
         document.getElementById('modal').classList.remove('active');
-        document.body.style.overflow = 'auto';
     }
-    window.onclick = (event) => { if (event.target == document.getElementById('modal')) closeModal(); };
 
+    // スクロールアニメ
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
