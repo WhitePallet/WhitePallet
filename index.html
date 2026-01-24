@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -40,19 +39,16 @@
         @media (min-width: 768px) { .next-visual { position: sticky; top: 100px; aspect-ratio: 1/1.4; } }
         .next-visual img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* 団員グリッド */
+        /* 団員グリッド（画像を削除したシンプル版） */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
-        .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
-        .item-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        
-        .member-thumb { width: 100%; aspect-ratio: 1/1; background: #f0f0f0; overflow: hidden; border-bottom: 2px solid #000; }
-        .member-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .member-name { padding: 15px 5px; font-weight: 900; background: #fff; }
+        .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; padding: 30px 10px; }
+        .item-card:hover { background: var(--main-black); color: #fff; transform: translateY(-5px); }
+        .member-name { font-weight: 900; font-size: 1.1rem; }
 
         /* モーダル */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
         .modal.active { display: flex; }
-        .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; }
+        .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; color: #000; }
         .close-modal { position: absolute; top: 10px; right: 15px; font-size: 2rem; cursor: pointer; font-weight: bold; }
 
         footer { text-align: center; padding: 60px 20px; background: #f9f9f9; border-top: 1px solid #eee; }
@@ -94,54 +90,18 @@
     <section id="members" class="reveal">
         <h2 class="section-title">MEMBERS<span>団員紹介</span></h2>
         <div class="grid">
-            <div class="item-card" onclick="openModal('01')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 01</div>
-            </div>
-            <div class="item-card" onclick="openModal('02')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 02</div>
-            </div>
-            <div class="item-card" onclick="openModal('03')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 03</div>
-            </div>
-            <div class="item-card" onclick="openModal('04')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 04</div>
-            </div>
-            <div class="item-card" onclick="openModal('05')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 05</div>
-            </div>
-            <div class="item-card" onclick="openModal('06')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 06</div>
-            </div>
-            <div class="item-card" onclick="openModal('07')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 07</div>
-            </div>
-            <div class="item-card" onclick="openModal('08')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 08</div>
-            </div>
-            <div class="item-card" onclick="openModal('09')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 09</div>
-            </div>
-            <div class="item-card" onclick="openModal('10')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 10</div>
-            </div>
-            <div class="item-card" onclick="openModal('11')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 11</div>
-            </div>
-            <div class="item-card" onclick="openModal('12')">
-                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
-                <div class="member-name">団員 12</div>
-            </div>
+            <div class="item-card" onclick="openModal('01')"><div class="member-name">団員 01</div></div>
+            <div class="item-card" onclick="openModal('02')"><div class="member-name">団員 02</div></div>
+            <div class="item-card" onclick="openModal('03')"><div class="member-name">団員 03</div></div>
+            <div class="item-card" onclick="openModal('04')"><div class="member-name">団員 04</div></div>
+            <div class="item-card" onclick="openModal('05')"><div class="member-name">団員 05</div></div>
+            <div class="item-card" onclick="openModal('06')"><div class="member-name">団員 06</div></div>
+            <div class="item-card" onclick="openModal('07')"><div class="member-name">団員 07</div></div>
+            <div class="item-card" onclick="openModal('08')"><div class="member-name">団員 08</div></div>
+            <div class="item-card" onclick="openModal('09')"><div class="member-name">団員 09</div></div>
+            <div class="item-card" onclick="openModal('10')"><div class="member-name">団員 10</div></div>
+            <div class="item-card" onclick="openModal('11')"><div class="member-name">団員 11</div></div>
+            <div class="item-card" onclick="openModal('12')"><div class="member-name">団員 12</div></div>
         </div>
     </section>
 
