@@ -11,6 +11,7 @@
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); overflow-x: hidden; line-height: 1.8; }
         
+        /* ヘッダー */
         header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
         .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
         .menu-btn { background: none; border: none; cursor: pointer; z-index: 2200; width: 44px; height: 44px; position: relative; }
@@ -39,17 +40,16 @@
         @media (min-width: 768px) { .next-visual { position: sticky; top: 100px; aspect-ratio: 1/1.4; } }
         .next-visual img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* 団員・過去上演グリッド */
+        /* 団員グリッド */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
-        .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); overflow: hidden; display: flex; flex-direction: column; }
+        .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
         .item-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         
-        /* 団員カード内の画像エリア */
         .member-thumb { width: 100%; aspect-ratio: 1/1; background: #f0f0f0; overflow: hidden; border-bottom: 2px solid #000; }
-        .member-thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .item-card:hover .member-thumb img { transform: scale(1.1); }
+        .member-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .member-name { padding: 15px 5px; font-weight: 900; background: #fff; }
 
+        /* モーダル */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
         .modal.active { display: flex; }
         .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; }
@@ -78,13 +78,135 @@
         <div class="next-container">
             <div class="info-card">
                 <div style="background:#000; color:#fff; display:inline-block; padding:5px 15px; font-weight:bold; margin-bottom:15px; font-size:0.9rem;">2026.03.14 (SAT)</div>
-                <h3>新作本公演『タイトル』</h3>
+                <h3>新作本公演『物語のタイトル』</h3>
                 <p><strong>会場：伊丹アイホール</strong></p>
                 <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
-                    <p>あらすじ：ここに物語のあらすじが入ります。長い文章でも、枠が自動で伸びるようになっています。</p>
+                    <p>あらすじ：ここに劇のあらすじが入ります。長い文章でもしっかり表示されます。</p>
                     <a href="#" download class="logo" style="display:block; margin-top:30px; font-size:0.8rem; text-decoration:underline;">[DOWNLOAD FLYER]</a>
                 </div>
             </div>
-
             <div class="next-visual">
-                <img src="
+                <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&" alt="公演画像">
+            </div>
+        </div>
+    </section>
+
+    <section id="members" class="reveal">
+        <h2 class="section-title">MEMBERS<span>団員紹介</span></h2>
+        <div class="grid">
+            <div class="item-card" onclick="openModal('01')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 01</div>
+            </div>
+            <div class="item-card" onclick="openModal('02')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 02</div>
+            </div>
+            <div class="item-card" onclick="openModal('03')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 03</div>
+            </div>
+            <div class="item-card" onclick="openModal('04')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 04</div>
+            </div>
+            <div class="item-card" onclick="openModal('05')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 05</div>
+            </div>
+            <div class="item-card" onclick="openModal('06')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 06</div>
+            </div>
+            <div class="item-card" onclick="openModal('07')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 07</div>
+            </div>
+            <div class="item-card" onclick="openModal('08')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 08</div>
+            </div>
+            <div class="item-card" onclick="openModal('09')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 09</div>
+            </div>
+            <div class="item-card" onclick="openModal('10')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 10</div>
+            </div>
+            <div class="item-card" onclick="openModal('11')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 11</div>
+            </div>
+            <div class="item-card" onclick="openModal('12')">
+                <div class="member-thumb"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&"></div>
+                <div class="member-name">団員 12</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="archive" class="reveal">
+        <h2 class="section-title">ARCHIVE<span>過去上演</span></h2>
+        <div class="grid">
+            <a href="archive-2025.html" class="item-card"><div class="member-name">旗揚げ公演 (2025)</div></a>
+            <a href="archive-2024.html" class="item-card"><div class="member-name">第2回公演 (2024)</div></a>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal" style="text-align: center;">
+        <h2 class="section-title" style="border-left:none; padding-left:0;">CONTACT<span>お問い合わせ</span></h2>
+        <a href="mailto:info@whitepalette.example.com" style="display:inline-block; background:#000; color:#fff; padding:20px 60px; text-decoration:none; font-weight:900;">メールを送る</a>
+    </section>
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<footer><p>&copy; 劇団WhitePalette</p></footer>
+
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navOverlay = document.getElementById('navOverlay');
+    menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+    });
+
+    const memberData = {
+        '01': '<h2>団員 01</h2><hr><p>プロフィールの詳細です。</p>',
+        '02': '<h2>団員 02</h2><hr><p>プロフィールの詳細です。</p>',
+        '03': '<h2>団員 03</h2><hr><p>プロフィールの詳細です。</p>',
+        '04': '<h2>団員 04</h2><hr><p>プロフィールの詳細です。</p>',
+        '05': '<h2>団員 05</h2><hr><p>プロフィールの詳細です。</p>',
+        '06': '<h2>団員 06</h2><hr><p>プロフィールの詳細です。</p>',
+        '07': '<h2>団員 07</h2><hr><p>プロフィールの詳細です。</p>',
+        '08': '<h2>団員 08</h2><hr><p>プロフィールの詳細です。</p>',
+        '09': '<h2>団員 09</h2><hr><p>プロフィールの詳細です。</p>',
+        '10': '<h2>団員 10</h2><hr><p>プロフィールの詳細です。</p>',
+        '11': '<h2>団員 11</h2><hr><p>プロフィールの詳細です。</p>',
+        '12': '<h2>団員 12</h2><hr><p>プロフィールの詳細です。</p>'
+    };
+
+    function openModal(id) {
+        document.getElementById('modal-body').innerHTML = memberData[id];
+        document.getElementById('modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    window.onclick = (event) => { if (event.target == document.getElementById('modal')) closeModal(); };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
