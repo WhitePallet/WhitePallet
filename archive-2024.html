@@ -3,131 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>劇団WhitePalette 公式サイト</title>
+    <title>過去公演詳細 | 劇団WhitePalette</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root { --main-bg: #fff; --main-black: #000; --accent-gray: #888; }
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); overflow-x: hidden; line-height: 1.8; }
+        body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); line-height: 1.8; }
         
-        /* ヘッダー・ナビ共通 */
         header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
-        .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
-        .menu-btn { background: none; border: none; cursor: pointer; z-index: 2200; width: 44px; height: 44px; position: relative; }
-        .menu-btn span { display: block; position: absolute; left: 10px; width: 24px; height: 3px; background: var(--main-black); transition: 0.4s; }
-        .menu-btn span:nth-child(1) { top: 14px; } .menu-btn span:nth-child(2) { top: 21px; } .menu-btn span:nth-child(3) { top: 28px; }
-        .menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .menu-btn.active span:nth-child(2) { opacity: 0; }
-        .menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        .nav-overlay { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: #fff; z-index: 2100; transition: 0.6s cubic-bezier(0.7, 0, 0.3, 1); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .nav-overlay.active { right: 0; }
-        .nav-overlay a { font-size: 2rem; font-weight: 900; color: var(--main-black); text-decoration: none; margin: 15px 0; letter-spacing: 5px; }
-
+        .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; text-decoration: none; color: #000; }
+        
         .container { max-width: 1000px; margin: 120px auto; padding: 0 20px; }
-        section { margin-top: -70px; padding-top: 120px; margin-bottom: 100px; }
-        .section-title { font-size: clamp(2rem, 8vw, 3rem); font-weight: 900; border-left: 10px solid var(--main-black); padding-left: 15px; margin-bottom: 40px; }
-        .section-title span { display: block; font-size: 0.8rem; letter-spacing: 2px; color: var(--accent-gray); margin-top: 10px; }
-
-        /* スライドショー設定 (ARCHIVE用) */
-        .archive-slider { position: relative; width: 100%; max-width: 600px; margin: 0 auto; border: 4px solid #000; overflow: hidden; background: #f0f0f0; }
-        .slides { display: flex; transition: transform 0.5s ease-in-out; }
-        .slide { min-width: 100%; position: relative; }
-        .slide img { width: 100%; height: auto; display: block; }
+        .back-link { display: inline-block; margin-bottom: 30px; text-decoration: none; color: var(--main-black); font-weight: bold; border-bottom: 2px solid #000; }
         
-        .slide-info { background: #000; color: #fff; padding: 15px; text-align: center; }
-        .slide-info h4 { margin: 0; font-size: 1.1rem; }
-        
-        /* 矢印ボタン */
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: #fff; border: none; width: 50px; height: 50px; cursor: pointer; z-index: 10; font-size: 1.5rem; transition: 0.3s; }
-        .slider-btn:hover { background: #000; }
-        .prev { left: 0; }
-        .next { right: 0; }
+        .archive-header { margin-bottom: 60px; }
+        .archive-year { font-size: 1.2rem; font-weight: bold; color: var(--accent-gray); }
+        .archive-title { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; margin: 10px 0; border-left: 10px solid #000; padding-left: 20px; }
 
-        /* 団員グリッド (枠のみ) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
-        .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); padding: 30px 10px; text-decoration: none; color: inherit; }
-        .item-card:hover { background: var(--main-black); color: #fff; }
+        .archive-layout { display: flex; flex-direction: column; gap: 40px; }
+        @media (min-width: 768px) { .archive-layout { flex-direction: row; } }
 
-        footer { text-align: center; padding: 60px 20px; border-top: 1px solid #eee; }
+        /* 左側：ポスター画像エリア */
+        .archive-visual { flex: 1; border: 4px solid #000; background: #f0f0f0; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .archive-visual img { width: 100%; height: auto; display: block; }
+
+        /* 右側：情報エリア */
+        .archive-info { flex: 1.2; }
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .info-table th, .info-table td { padding: 15px 0; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
+        .info-table th { width: 100px; font-size: 0.9rem; color: var(--accent-gray); }
+
+        .synopsis-box { margin-top: 40px; padding: 30px; border: 2px solid #000; background: #fafafa; }
+        .synopsis-box h3 { margin-top: 0; font-weight: 900; }
+
+        /* 追加：サブ画像エリア（ギャラリー風） */
+        .archive-gallery { margin-top: 60px; }
+        .gallery-title { font-weight: 900; margin-bottom: 20px; font-size: 1.2rem; }
+        .gallery-item { border: 4px solid #000; width: 100%; max-width: 600px; }
+        .gallery-item img { width: 100%; height: auto; display: block; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid #eee; margin-top: 100px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">WhitePalette</div>
-    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+    <a href="index.html" class="logo">WhitePalette</a>
 </header>
 
-<nav class="nav-overlay" id="navOverlay">
-    <a href="#next" class="nav-link">NEXT</a>
-    <a href="#members" class="nav-link">MEMBERS</a>
-    <a href="#archive" class="nav-link">ARCHIVE</a>
-</nav>
-
 <div class="container">
-    <section id="next">
-        <h2 class="section-title">NEXT<span>次回公演</span></h2>
-        <p>ここに次回公演の情報が入ります。</p>
-    </section>
+    <a href="index.html" class="back-link">← BACK TO HOME</a>
 
-    <section id="members">
-        <h2 class="section-title">MEMBERS<span>団員紹介</span></h2>
-        <div class="grid">
-            <div class="item-card">団員 01</div>
-            <div class="item-card">団員 02</div>
-            <div class="item-card">団員 03</div>
+    <article class="archive-header">
+        <div class="archive-year">Special Archive</div>
+        <h1 class="archive-title">公演アーカイブ詳細</h1>
+    </article>
+
+    <div class="archive-layout">
+        <div class="archive-visual">
+            <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464469671003684917/91__20250113134518.png?ex=6975952a&is=697443aa&hm=a858554c3bfb7c59af412df8be92f9343989fa19a6e67f2eb8a831f1069eaa2d&" alt="メインポスター">
+        </div>
+
+        <div class="archive-info">
+            <table class="info-table">
+                <tr>
+                    <th>DATE</th>
+                    <td>202X年 〇月 〇日 〜 〇日</td>
+                </tr>
+                <tr>
+                    <th>PLACE</th>
+                    <td>伊丹アイホール</td>
+                </tr>
+                <tr>
+                    <th>CAST</th>
+                    <td>劇団WhitePalette 団員一同</td>
+                </tr>
+                <tr>
+                    <th>STAFF</th>
+                    <td>演出・脚本：WhitePalette</td>
+                </tr>
+            </table>
+
+            <div class="synopsis-box">
+                <h3>STORY</h3>
+                <p>
+                    劇団の活動記録をここに記載します。
+                    2枚の画像を贅沢に使用したレイアウトになっています。
+                </p>
             </div>
-    </section>
 
-    <section id="archive">
-        <h2 class="section-title">ARCHIVE<span>過去上演</span></h2>
-        <div class="archive-slider">
-            <button class="slider-btn prev" onclick="moveSlide(-1)">❮</button>
-            <button class="slider-btn next" onclick="moveSlide(1)">❯</button>
-            
-            <div class="slides" id="slideContainer">
-                <div class="slide">
-                    <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464469671003684917/91__20250113134518.png?ex=6975952a&is=69743c6b&hm=a858554c3bfb7c59af412df8be92f9343989fa19a6e67f2eb8a831f1069eaa2d&" alt="2025公演ポスター">
-                    <div class="slide-info">
-                        <h4>旗揚げ公演 (2025)</h4>
-                        <a href="archive-2025.html" style="color:#fff; font-size:0.8rem;">DETAILS →</a>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464470002835914863/91__20241230195316.png?ex=69759579&is=69743c6b&hm=7f368333ead1c07a8b3d5de3e324ea77042d805e4df69d6825e4086fd381b7de&" alt="2024公演ポスター">
-                    <div class="slide-info">
-                        <h4>第2回公演 (2024)</h4>
-                        <a href="archive-2024.html" style="color:#fff; font-size:0.8rem;">DETAILS →</a>
-                    </div>
+            <div class="archive-gallery">
+                <div class="gallery-title">STAGE PHOTO</div>
+                <div class="gallery-item">
+                    <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464470002835914863/91__20241230195316.png?ex=69759579&is=697443f9&hm=7f368333ead1c07a8b3d5de3e324ea77042d805e4df69d6825e4086fd381b7de&" alt="サブ画像">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 
 <footer><p>&copy; 劇団WhitePalette</p></footer>
-
-<script>
-    // メニュー開閉
-    const menuBtn = document.getElementById('menuBtn');
-    const navOverlay = document.getElementById('navOverlay');
-    menuBtn.addEventListener('click', () => {
-        menuBtn.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-    });
-
-    // スライド機能
-    let currentSlide = 0;
-    const slides = document.getElementById('slideContainer');
-    const totalSlides = 2; // 画像の枚数
-
-    function moveSlide(step) {
-        currentSlide = (currentSlide + step + totalSlides) % totalSlides;
-        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-</script>
 
 </body>
 </html>
