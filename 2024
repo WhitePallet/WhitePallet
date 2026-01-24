@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>過去公演詳細 | 劇団WhitePalette</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root { --main-bg: #fff; --main-black: #000; --accent-gray: #888; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); line-height: 1.8; }
+        
+        header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
+        .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; text-decoration: none; color: #000; }
+        
+        .container { max-width: 1000px; margin: 120px auto; padding: 0 20px; }
+        .back-link { display: inline-block; margin-bottom: 30px; text-decoration: none; color: var(--main-black); font-weight: bold; border-bottom: 2px solid #000; }
+        
+        .archive-header { margin-bottom: 60px; }
+        .archive-year { font-size: 1.2rem; font-weight: bold; color: var(--accent-gray); }
+        .archive-title { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; margin: 10px 0; border-left: 10px solid #000; padding-left: 20px; }
+
+        .archive-layout { display: flex; flex-direction: column; gap: 40px; }
+        @media (min-width: 768px) { .archive-layout { flex-direction: row; } }
+
+        .archive-visual { flex: 1; border: 4px solid #000; background: #f0f0f0; display: flex; justify-content: center; align-items: center; }
+        .archive-visual img { width: 100%; height: auto; display: block; }
+
+        .archive-info { flex: 1.2; }
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .info-table th, .info-table td { padding: 15px 0; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
+        .info-table th { width: 100px; font-size: 0.9rem; color: var(--accent-gray); }
+
+        .synopsis-box { margin-top: 40px; padding: 30px; border: 2px solid #000; background: #fafafa; }
+        .synopsis-box h3 { margin-top: 0; font-weight: 900; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid #eee; margin-top: 100px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">WhitePalette</a>
+</header>
+
+<div class="container">
+    <a href="index.html" class="back-link">← BACK TO HOME</a>
+
+    <article class="archive-header">
+        <div class="archive-year">2025 Performance</div>
+        <h1 class="archive-title">旗揚げ公演『ここにタイトル』</h1>
+    </article>
+
+    <div class="archive-layout">
+        <div class="archive-visual">
+            <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464461890510913659/7299_-_12.png?ex=69758deb&is=69743c6b&hm=3e8e3f3dd458e784090ed647b7801d480c2faa2521aa5f9bae54ff1547023c7d&" alt="公演ビジュアル">
+        </div>
+
+        <div class="archive-info">
+            <table class="info-table">
+                <tr>
+                    <th>DATE</th>
+                    <td>2025年 〇月 〇日 〜 〇日</td>
+                </tr>
+                <tr>
+                    <th>PLACE</th>
+                    <td>伊丹アイホール</td>
+                </tr>
+                <tr>
+                    <th>CAST</th>
+                    <td>団員01 / 団員02 / 団員03 / ゲスト俳優</td>
+                </tr>
+                <tr>
+                    <th>STAFF</th>
+                    <td>演出：〇〇 / 脚本：〇〇 / 照明：〇〇</td>
+                </tr>
+            </table>
+
+            <div class="synopsis-box">
+                <h3>STORY</h3>
+                <p>
+                    当時のあらすじをここに記載します。劇団の歴史を振り返る大切なアーカイブになります。
+                    文章量が多くなっても、この枠が自動で伸びて表示されるようになっています。
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer><p>&copy; 劇団WhitePalette</p></footer>
+
+</body>
+</html>
