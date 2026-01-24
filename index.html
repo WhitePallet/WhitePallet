@@ -11,7 +11,6 @@
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: "Inter", "Hiragino Kaku Gothic ProN", sans-serif; margin: 0; background: var(--main-bg); color: var(--main-black); overflow-x: hidden; line-height: 1.8; }
         
-        /* ヘッダー */
         header { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(255,255,255,0.95); border-bottom: 3px solid var(--main-black); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 2000; backdrop-filter: blur(8px); }
         .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.1rem; }
         .menu-btn { background: none; border: none; cursor: pointer; z-index: 2200; width: 44px; height: 44px; position: relative; }
@@ -32,7 +31,6 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* 次回公演：画像全体を表示する設定 + スライドショー */
         .next-container { display: flex; flex-direction: column; gap: 30px; }
         @media (min-width: 768px) { .next-container { flex-direction: row; align-items: flex-start; } }
         .info-card { flex: 1.2; border: 4px solid var(--main-black); padding: clamp(25px, 5vw, 45px); background: #fff; }
@@ -42,30 +40,24 @@
             border: 1px solid #000; 
             background: #fff; 
             line-height: 0;
-            position: relative; /* スライドボタンのために追加 */
-            overflow: hidden;   /* スライドを隠すために追加 */
+            position: relative; 
+            overflow: hidden;   
             height: auto;
         }
-        @media (min-width: 768px) { 
-            .next-visual { 
-                position: sticky; 
-                top: 100px; 
-            } 
-        }
+        @media (min-width: 768px) { .next-visual { position: sticky; top: 100px; } }
+        
         .next-slides {
             display: flex;
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .next-slide {
-            min-width: 100%;
-        }
+        .next-slide { min-width: 100%; }
         .next-slide img { 
             width: 100%; 
             height: auto; 
             display: block; 
-            object-fit: contain; /* 画像を縮小して全体を表示 */
+            object-fit: contain; 
         }
-        /* スライドボタン */
+
         .next-slider-btn { 
             position: absolute; 
             top: 50%; 
@@ -77,7 +69,7 @@
             height: 40px; 
             cursor: pointer; 
             z-index: 10; 
-            font-size: 1rem; 
+            font-size: 1.2rem; 
             transition: 0.3s;
             display: flex;
             justify-content: center;
@@ -87,14 +79,11 @@
         .next-prev { left: 0; }
         .next-next { right: 0; }
 
-
-        /* 団員グリッド */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
         .item-card { background: #fff; text-align: center; transition: 0.3s; cursor: pointer; border: 2px solid var(--main-black); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; padding: 30px 10px; }
         .item-card:hover { background: var(--main-black); color: #fff; transform: translateY(-5px); }
         .member-name { font-weight: 900; font-size: 1.1rem; }
 
-        /* モーダル */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
         .modal.active { display: flex; }
         .modal-content { background: #fff; width: 100%; max-width: 500px; padding: 40px; position: relative; border: 5px solid #000; color: #000; }
@@ -126,7 +115,7 @@
                 <h3>新作本公演『物語のタイトル』</h3>
                 <p><strong>会場：伊丹アイホール</strong></p>
                 <div style="border-top:2px solid #000; padding-top:20px; margin-top:20px;">
-                    <p>
+                    <p style="font-size: 0.95rem; text-align: justify;">
                         2021年7月29日午前9時、講堂。文化祭で上演するクラス劇の打ち合わせに、来るはずの嵯峨が来ない。
                         仕方なく話し合いをはじめる西松、賀東、浅岡の三人。オリンピックの話、コロナの話、クラス、部活、
                         進路の話、家族の話。打ち合わせは一向に進まない。クラス劇はどうなるのだろう。そして嵯峨は･･･。
@@ -136,19 +125,13 @@
                 </div>
             </div>
             <div class="next-visual">
-                <button class="next-slider-btn next-prev" onclick="moveNextSlide(-1)">❮</button>
-                <button class="next-slider-btn next-next" onclick="moveNextSlide(1)">❯</button>
+                <button class="next-slider-btn next-prev" onclick="manualMove(-1)">❮</button>
+                <button class="next-slider-btn next-next" onclick="manualMove(1)">❯</button>
                 
                 <div class="next-slides" id="nextSlideContainer">
-                    <div class="next-slide">
-                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475630178533552/1769228582196.jpg?ex=69759ab6&is=69744936&hm=b4094fdb0b0db5079b45977fc2ddfe87362b135efd47840ab89767b14edf1797&" alt="公演ポスター1">
-                    </div>
-                    <div class="next-slide">
-                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475630879113226/1769228580948.jpg?ex=69759ab7&is=69744937&hm=599e85b998f3dd73bd7f0ffc9810b335bd23114a86c7e805cc65345f49027166&" alt="公演ポスター2">
-                    </div>
-                    <div class="next-slide">
-                        <img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475631210205256/1769228579606.jpg?ex=69759ab7&is=69744937&hm=e8d72933859155d7048dcc3bedcc26f310dfcc78ab825ef6e682666fdda72013&" alt="公演ポスター3">
-                    </div>
+                    <div class="next-slide"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475630178533552/1769228582196.jpg?ex=69759ab6&is=69744936&hm=b4094fdb0b0db5079b45977fc2ddfe87362b135efd47840ab89767b14edf1797&" alt="1"></div>
+                    <div class="next-slide"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475630879113226/1769228580948.jpg?ex=69759ab7&is=69744937&hm=599e85b998f3dd73bd7f0ffc9810b335bd23114a86c7e805cc65345f49027166&" alt="2"></div>
+                    <div class="next-slide"><img src="https://cdn.discordapp.com/attachments/1464461003885515038/1464475631210205256/1769228579606.jpg?ex=69759ab7&is=69744937&hm=e8d72933859155d7048dcc3bedcc26f310dfcc78ab825ef6e682666fdda72013&" alt="3"></div>
                 </div>
             </div>
         </div>
@@ -203,21 +186,33 @@
         navOverlay.classList.toggle('active');
     });
 
-    // NEXTセクションのスライドショー制御
-    let currentNextSlide = 0;
-    const nextSlides = document.getElementById('nextSlideContainer');
-    const totalNextSlides = 3; // 画像の枚数に合わせる
+    // スライドショー制御
+    let currentIndex = 0;
+    const slides = document.getElementById('nextSlideContainer');
+    const totalSlides = 3;
 
-    function moveNextSlide(step) {
-        currentNextSlide = (currentNextSlide + step + totalNextSlides) % totalNextSlides;
-        nextSlides.style.transform = `translateX(-${currentNextSlide * 100}%)`;
+    function moveSlide() {
+        // 次のインデックスへ。最大数を超えたら0に戻る
+        currentIndex = (currentIndex + 1) % totalSlides;
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
-    // 自動スクロール
-    setInterval(() => {
-        moveNextSlide(1);
-    }, 4000); // 4秒ごとにスライド
+    // ボタン用の手動切り替え（自動再生のタイマーと干渉しないよう管理）
+    function manualMove(step) {
+        currentIndex = (currentIndex + step + totalSlides) % totalSlides;
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        resetTimer(); // 手動操作時にタイマーをリセット
+    }
 
+    // 4秒ごとの自動再生
+    let slideTimer = setInterval(moveSlide, 4000);
+
+    function resetTimer() {
+        clearInterval(slideTimer);
+        slideTimer = setInterval(moveSlide, 4000);
+    }
+
+    // 団員データとモーダル
     const memberData = {
         '01': '<h2>団員 01</h2><hr><p>プロフィールの詳細です。</p>',
         '02': '<h2>団員 02</h2><hr><p>プロフィールの詳細です。</p>',
